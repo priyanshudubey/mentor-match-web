@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { BASE_URL } from "../utils/constants";
+import axios from "axios";
 
 // Truncate text to a given number of words and append ellipsis if truncated
 function truncateWords(text, limit = 15) {
@@ -7,7 +9,6 @@ function truncateWords(text, limit = 15) {
   if (words.length <= limit) return text;
   return words.slice(0, limit).join(" ") + "...";
 }
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnection } from "../utils/connectionSlice";
 
@@ -17,7 +18,7 @@ const Connections = () => {
 
   const fetchConnections = async () => {
     try {
-      const res = await axios.get("http://localhost:7777/user/connections", {
+      const res = await axios.get(`${BASE_URL}user/connections`, {
         withCredentials: true,
       });
       dispatch(addConnection(res?.data?.data));

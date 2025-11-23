@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -21,13 +22,13 @@ const Login = () => {
     if (isSignup) {
       try {
         await axios.post(
-          "http://localhost:7777/signup",
+          `${BASE_URL}signup`,
           { firstName, lastName, emailId, password },
           { withCredentials: true }
         );
         // after successful signup, auto-login user
         const response = await axios.post(
-          "http://localhost:7777/login",
+          `${BASE_URL}login`,
           { emailId, password },
           { withCredentials: true }
         );
@@ -42,7 +43,7 @@ const Login = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:7777/login",
+        `${BASE_URL}login`,
         {
           emailId,
           password,

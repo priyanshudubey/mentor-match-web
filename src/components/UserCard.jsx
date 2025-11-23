@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../utils/feedSlice";
+import { BASE_URL } from "../utils/constants";
 
 const UserCard = ({ user, isProfile = false, onEdit }) => {
   const [processing, setProcessing] = useState(false);
@@ -26,7 +27,7 @@ const UserCard = ({ user, isProfile = false, onEdit }) => {
     setProcessing(true);
     setErr("");
     try {
-      const url = `http://localhost:7777/request/send/${status}/${toId}`;
+      const url = `${BASE_URL}request/send/${status}/${toId}`;
       await axios.post(url, {}, { withCredentials: true });
       // On success remove this user from feed so it no longer shows
       dispatch(removeUser(toId));

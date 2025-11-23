@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests } from "../utils/requestsSlice";
+import { BASE_URL } from "../utils/constants";
 
 // Truncate text to a given number of words and append ellipsis if truncated
 function truncateWords(text, limit = 60) {
@@ -53,7 +54,7 @@ const Requests = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.get("http://localhost:7777/user/requests", {
+      const res = await axios.get(`${BASE_URL}user/requests`, {
         withCredentials: true,
       });
       const data = res?.data?.availableRequest || [];
@@ -133,7 +134,7 @@ const Requests = () => {
               try {
                 setProcessingIds((s) => [...s, reqId]);
                 setError("");
-                const url = `http://localhost:7777/request/review/${status}/${reqId}`;
+                const url = `${BASE_URL}request/review/${status}/${reqId}`;
                 await axios.post(url, {}, { withCredentials: true });
                 // remove this request from the list in the store
                 const newList = (requests || []).filter(

@@ -3,6 +3,7 @@ import UserCard from "./UserCard";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { addUser } from "../utils/userSlice";
+import { BASE_URL } from "../utils/constants";
 
 function EditProfile({ user, onCancel }) {
   const [firstName, setFirstName] = useState(user?.firstName || "");
@@ -21,7 +22,7 @@ function EditProfile({ user, onCancel }) {
     e.preventDefault();
     try {
       const res = await axios.patch(
-        "http://localhost:7777/profile/edit",
+        `${BASE_URL}profile/edit`,
         {
           firstName,
           lastName,
