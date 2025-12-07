@@ -1,4 +1,6 @@
-# React + Vite
+# Mentor Match
+
+Mentor Match is a lightweight React + Vite frontend where junior developers can match with senior engineers for mentorship. This repo contains the frontend application (no functionality changes were made during renaming).
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
